@@ -1,4 +1,7 @@
 #pragma once
 
-#include "PrimitiveTypes.h"
-#include "API.h"
+#include "include/PrimitiveTypes.h"
+#include "include/API.h"
+
+#include "include/Engine.h"
+#include "include/WindowAPI.h"

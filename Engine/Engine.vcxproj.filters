@@ -53,6 +53,9 @@
     <ClInclude Include="include\API.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\Engine.h">
+      <Filter>include</Filter>
+    </ClInclude>
     <ClInclude Include="include\Log.h">
       <Filter>include</Filter>
     </ClInclude>
@@ -60,6 +63,9 @@
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="include\Window.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\WindowAPI.h">
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="vendor\spdlog\bench\utils.h">
@@ -386,17 +392,20 @@
     <ClInclude Include="vendor\spdlog\tests\utils.h">
       <Filter>vendor\spdlog\tests</Filter>
     </ClInclude>
-    <ClInclude Include="include\Engine.h" />
-    <ClInclude Include="include\WindowAPI.h" />
+    <ClInclude Include="include\LogAPI.h" />
+    <ClInclude Include="include\Graphics.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="depch.cpp" />
+    <ClCompile Include="src\Engine.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
     <ClCompile Include="src\Log.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Platform\Windows\Window.cpp">
+    <ClCompile Include="src\Platform\Windows\Window_Windows.cpp">
       <Filter>src\Platform\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="src\Engine.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\Windows\Graphics_OpenGL_Windows.cpp" />
   </ItemGroup>
 </Project>

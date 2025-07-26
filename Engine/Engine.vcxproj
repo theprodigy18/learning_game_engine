@@ -156,7 +156,9 @@
     <ClInclude Include="depch.h" />
     <ClInclude Include="include\API.h" />
     <ClInclude Include="include\Engine.h" />
+    <ClInclude Include="include\Graphics.h" />
     <ClInclude Include="include\Log.h" />
+    <ClInclude Include="include\LogAPI.h" />
     <ClInclude Include="include\PrimitiveTypes.h" />
     <ClInclude Include="include\Window.h" />
     <ClInclude Include="include\WindowAPI.h" />
@@ -275,7 +277,8 @@
     </ClCompile>
     <ClCompile Include="src\Engine.cpp" />
     <ClCompile Include="src\Log.cpp" />
-    <ClCompile Include="src\Platform\Windows\Window.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\Windows\Graphics_OpenGL_Windows.cpp" />
+    <ClCompile Include="src\Platform\Windows\Window_Windows.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

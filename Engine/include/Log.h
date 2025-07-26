@@ -1,12 +1,12 @@
 #pragma once
 
-#include <spdlog/spdlog.h>
+#include "LogAPI.h"
 
 namespace Drop
 {
     void LogInit();
 
-    std::shared_ptr<spdlog::logger>& GetCoreLogger();
+    std::shared_ptr<Logger>& GetCoreLogger();
 } // namespace Drop
 
 #ifndef DE_DIST

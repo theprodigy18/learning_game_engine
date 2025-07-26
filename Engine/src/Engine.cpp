@@ -2,6 +2,7 @@
 #include "Engine.h"
 
 #include "Window.h"
+#include "Graphics.h"
 
 namespace Drop
 {

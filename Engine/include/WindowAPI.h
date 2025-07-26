@@ -1,14 +1,5 @@
 #pragma once
 
-#ifdef DE_PLATFORM_WINDOWS
-#define WIN32_LEAN_AND_MEAN
-#define NOMINMAX
-#include <Windows.h>
-
-using WindowHandle  = HWND;
-using WindowContext = HDC;
-#endif
-
 #define WINDOW_TYPE_FRAME BIT(0)
 #define WINDOW_TYPE_RESIZE BIT(1)
 #define WINDOW_TYPE_MINIMIZE BIT(2)
@@ -21,13 +12,65 @@ using WindowContext = HDC;
 
 namespace Drop
 {
-    DE_API struct WindowInfo
+    struct WindowInfo;
+
+    DE_API struct WindowRect
     {
-        WindowHandle  handle {nullptr};
-        WindowContext context {nullptr};
+        i32 left {0};
+        i32 top {0};
+        i32 right {0};
+        i32 bottom {0};
     };
 
-    DE_API WindowInfo PlatformCreateWindow(const char* title, u32 width, u32 height, u32 flags, WindowHandle parent = nullptr);
-    DE_API void       PlatformDestroyWindow(WindowInfo& info);
-} // namespace Drop
+    DE_API struct WindowSize
+    {
+        WindowRect clientRect;
+        WindowRect fullRect;
+    };
 
+	DE_API struct WindowPoint
+	{
+		union
+		{
+			struct
+			{
+				i32 x;
+				i32 y;
+			};
+			struct
+			{
+				i32 w;
+				i32 h;
+			};
+		};
+	};
+
+	using ResizeCallback = bool (*)(const WindowSize* pSize);
+	using CloseCallback  = bool (*)();
+	using SetMinMaxCallback = bool (*)(WindowPoint& outMin, WindowPoint& outMax);
+
+    DE_API struct WindowEventCallback
+    {
+        ResizeCallback OnResize {nullptr};
+        CloseCallback  OnClose {nullptr};
+		SetMinMaxCallback OnSetMinMax {nullptr};
+    };
+
+    DE_API struct WindowInitProps
+    {
+        const char*         title;
+        u32                 width {0};
+        u32                 height {0};
+        u32                 flags {WINDOW_TYPE_NORMAL};
+        WindowEventCallback events;
+    };
+
+    DE_API bool PlatformCreateWindow(WindowInfo** ppInfo, const WindowInitProps* pProps, const WindowInfo* pParentInfo = nullptr);
+    DE_API void PlatformDestroyWindow(WindowInfo** ppInfo);
+
+    DE_API bool PlatformPollEvents(); // false if all windows are closed.
+
+    DE_API void PlatformResizeWindow(const WindowInfo* pInfo, const WindowSize* pSize);
+
+	DE_API void PlatformSendQuit(i32 exitCode = 0);
+} // namespace Drop
